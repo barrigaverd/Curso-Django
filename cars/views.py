@@ -3,7 +3,8 @@ from cars.models import Car
 
 
 def cars_view(request):
-    cars = Car.objects.filter(model__contains = "M")
+    search = request.GET.get('search')
+    cars = Car.objects.filter(model__contains=search) if search else Car.objects.all()
 
     return render(
         request, 
